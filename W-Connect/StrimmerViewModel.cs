@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace W_Connect
 {
-    public class StrimmerViewModel : INotifyPropertyChanged
+    public class StrimmerViewModel 
     {
-        public Controller MainController { get; set; }
+/*        public Controller MainController { get; set; }
         public StrimmerController Controller { get; set; }
 
         private Road _selectedRoad;
@@ -30,6 +30,6 @@ namespace W_Connect
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        }*/
     }
 }

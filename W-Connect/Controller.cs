@@ -14,13 +14,14 @@ namespace W_Connect
     {
         private string sqliteFilePath = ""; // Store the path for reuse
 
-        public Dictionary<string, StrimmerEffect> EffectDataDictionary;
+        public Dictionary<string, StrimmerEffect> EffectDataDictionary { get; set; } = new Dictionary<string, StrimmerEffect>();
+       // public Dictionary<string, Ligh> FanSettings { get; set; } = new Dictionary<string, string>();
 
         public StrimmerController strimmer;
 
         public Controller()
         {
-            EffectDataDictionary = new Dictionary<string, StrimmerEffect>();
+            //EffectDataDictionary = new Dictionary<string, StrimmerEffect>();
         }
         public string SqliteFilePath
         {

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="W_Connect.MenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:W_Connect"
+             mc:Ignorable="d" 
+             d:DesignHeight="546" d:DesignWidth="222">
+    <Grid>
+        <Button Height="25" Width="80" Margin="-102,-480,0,0" Click="ImportButton_Click"  Content="Import"/>
+        <Button Height="25" Width="80" Margin="102,-480,0,0" Content="Export"/>
+        <Label Name="fileNameLabel" HorizontalAlignment="Left" Margin="5,50,0,0" VerticalAlignment="Top">
+            <TextBlock Text="File Name: " TextWrapping="Wrap" Width="222"/>
+        </Label>
+        <Button Height="100" Margin="0,-150,0,0" Content="Fan Light Settings" Command="{Binding DataContext.ShowFanLightCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+        <Button Height="100" Margin="0,250,0,0"  Content="Strimmer Settings" Command="{Binding DataContext.ShowStrimmerCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+    </Grid>
+</UserControl>
