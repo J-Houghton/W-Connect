@@ -7,6 +7,7 @@ using System.Data.SQLite;
 using Newtonsoft.Json;
 using static W_Connect.MainWindow;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 
 namespace W_Connect
 {
@@ -49,6 +50,7 @@ namespace W_Connect
                         {
                             string key = reader.GetString(0);
                             string json = reader.GetString(1);
+                            //json = Regex.Replace(json, ",+", "");
 
                             if (key.Contains("StrimerLightEfferct"))
                             {
@@ -72,7 +74,7 @@ namespace W_Connect
                                     strimmer = JsonConvert.DeserializeObject<StrimmerController>(json);
                                 } catch (Exception ex)
                                 {
-
+                                    Console.WriteLine($"Failed to deserialize key: {key}. Error: {ex.Message}");
                                 }
                             }
 /*                          else if (key.Contains("SLInfLightEffect"))
