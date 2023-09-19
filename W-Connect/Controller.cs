@@ -18,7 +18,7 @@ namespace W_Connect
         public Dictionary<string, StrimmerEffect> EffectDataDictionary { get; set; } = new Dictionary<string, StrimmerEffect>();
        // public Dictionary<string, Ligh> FanSettings { get; set; } = new Dictionary<string, string>();
 
-        public StrimmerController strimmer;
+        public StrimmerController strimmerController;
 
         public Controller()
         {
@@ -56,6 +56,7 @@ namespace W_Connect
                             {
                                 try
                                 {
+
                                     StrimmerEffect effect = JsonConvert.DeserializeObject<StrimmerEffect>(json);
                                     if (effect != null)
                                     {
@@ -71,7 +72,7 @@ namespace W_Connect
                             {
                                 try
                                 {
-                                    strimmer = JsonConvert.DeserializeObject<StrimmerController>(json);
+                                    strimmerController = JsonConvert.DeserializeObject<StrimmerController>(json);
                                 } catch (Exception ex)
                                 {
                                     Console.WriteLine($"Failed to deserialize key: {key}. Error: {ex.Message}");

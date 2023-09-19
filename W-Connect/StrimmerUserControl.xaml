@@ -10,39 +10,39 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Fill="Purple" Visibility="Collapsed"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Fill="Purple" Visibility="Collapsed"/>
         <Rectangle Name ="_3x8Selector" Grid.Row="0" Grid.Column="2" Fill="Red" Visibility="Collapsed"/>
         <Rectangle Name="_2x8Selector" Grid.Row="0" Grid.Column="1" Fill="Red" Visibility="Collapsed"/>
         <Rectangle Name="_24Selector" Grid.Row="0" Grid.Column="0" Fill="Red" Visibility="Collapsed"/>
-        <Rectangle Grid.Row="1" Grid.ColumnSpan="3" Fill="Orange" />
-        <Button Height="60" Margin="5,5,5,5" Grid.Column="0">24PIN</Button>
-        <Button Height="60" Margin="5,5,5,5" Grid.Column="1">2x8PIN</Button>
-        <Button Height="60" Margin="5,5,5,5" Grid.Column="2">3x8PIN</Button>
-        <Label Content="Speed" Grid.Column="2" Grid.Row="3" Margin="50,80,0,0" Background="Blue"/>
-        <Label Content="Brightness" Grid.Column="2" Grid.Row="3" Margin="50,180,0,0" Background="Blue"/>
-        <Label Content="Direction" Grid.Column="2" Grid.Row="3" Margin="50,280,0,0" Background="Blue"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Fill="Orange" />
+        <Button Name="_24PinButton" Height="60" Margin="5,5,5,5" Grid.Column="0" Click="_24PinButton_Click">24PIN</Button>
+        <Button Name="_2x8PinButton" Height="60" Margin="5,5,5,5" Grid.Column="1" Click="_2x8PinButton_Click">2x8PIN</Button>
+        <Button Name="_3x8PinButton" Height="60" Margin="5,5,5,5" Grid.Column="2" Click="_3x8PinButton_Click">3x8PIN</Button>
+        <Label Content="Speed" Grid.Column="2" Grid.Row="1" Margin="50,80,0,0" Background="Blue"/>
+        <Label Content="Brightness" Grid.Column="2" Grid.Row="1" Margin="50,180,0,0" Background="Blue"/>
+        <Label Content="Direction" Grid.Column="2" Grid.Row="1" Margin="50,280,0,0" Background="Blue"/>
         <Label Content="Change Strimmer Effect: " Margin="15,5,0,0" Background="Blue" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
-        <ComboBox Width="220" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top" Height="25" Name="RoadsComboBox" Grid.Row="1"/>
-        <CheckBox Grid.Row="1" Grid.Column="0" Margin="15,65,0,0">Change Controller</CheckBox>
-        <Label Name="StripToggles" Content=""/>
-        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240" Width="48" Margin="177,88,0,0">
+        <ComboBox SelectionChanged="EffectsComboBox_SelectionChanged" Width="220" HorizontalAlignment="Left" Margin="15,36,0,0" VerticalAlignment="Top" Height="25" Name="EffectsComboBox" Grid.Row="1" Grid.ColumnSpan="2"/>
+        <CheckBox Name="_ControllerCheckbox" Grid.Row="1" Grid.Column="0" Margin="15,68,113,389" IsChecked="True">Change Controller</CheckBox>
+
+        <WrapPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Height="240" Width="48" Margin="177,88,0,0" Grid.ColumnSpan="2">
             <!-- Color Toggle Buttons. The visibility can be adjusted in the code-behind based on the road selection -->
-            <CheckBox Name="LightToggleButton1" Content="1" Margin="10"/>
-            <CheckBox Name="LightToggleButton2" Content="2" Margin="10"/>
-            <CheckBox Name="LightToggleButton3" Content="3" Margin="10"/>
-            <CheckBox Name="LightToggleButton4" Content="4" Margin="10"/>
-            <CheckBox Name="LightToggleButton5" Content="5" Margin="10"/>
-            <CheckBox Name="LightToggleButton6" Content="6" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox1" Content="1" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox2" Content="2" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox3" Content="3" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox4" Content="4" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox5" Content="5" Margin="10"/>
+            <CheckBox Name="LightToggleCheckBox6" Content="6" Margin="10"/>
         </WrapPanel>
         
-        <WrapPanel Name="RGBSelectors" Grid.Row="1" Grid.Column="1">
+        <WrapPanel Name="RGBSelectors" Grid.Row="1" Grid.Column="1" Margin="8,0,32,0">
             <xctk:ColorPicker Name="ColorPicker1" Margin="20" Height="25" Width="75"/>
             <xctk:ColorPicker Name="ColorPicker2" Margin="20" Height="25" Width="75"/>
             <xctk:ColorPicker Name="ColorPicker3" Margin="20" Height="25" Width="75"/>
@@ -50,5 +50,8 @@
             <xctk:ColorPicker Name="ColorPicker5" Margin="20" Height="25" Width="75"/>
             <xctk:ColorPicker Name="ColorPicker6" Margin="20" Height="25" Width="75"/>
         </WrapPanel>
+        <Label Content="Last saved: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Margin="10,0,0,70"/>
+        <Label Name="_lastSavedTime" Content="test" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" Margin="70,0,0,70"/>
+        <Button Grid.Row="1" Grid.Column="0" Height="60" Width="150" Margin="10,406,90,6" Click="SaveButton_Click">Save Changes</Button>
     </Grid>
 </UserControl>

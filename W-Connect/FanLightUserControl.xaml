@@ -16,6 +16,6 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Content="Change Fan Light Effect: " Margin="10,15,0,0" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
-        <ComboBox Width="250" Grid.ColumnSpan="2" Height="25" Margin="156,17,345,49" Name="RoadsComboBox" Grid.Row="0" Grid.Column="0"/>
+        <ComboBox Width="250" Grid.ColumnSpan="2" Height="25" Margin="156,17,345,49" Name="EffectsComboBox" Grid.Row="0" Grid.Column="0"/>
     </Grid>
 </UserControl>

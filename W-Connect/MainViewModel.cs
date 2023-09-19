@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Media;
 
 namespace W_Connect
 {
@@ -61,6 +62,76 @@ namespace W_Connect
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /*private StrimmerController _strimmer;
+        private int _roadIndex;
+        private int _singleModeIndex;
+
+        public StrimmerController Strimmer
+        {
+            get => _strimmer;
+            set
+            {
+                _strimmer = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int RoadIndex
+        {
+            get => _roadIndex;
+            set
+            {
+                _roadIndex = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentColors));  // Notify that the current colors might have changed.
+            }
+        }
+
+        public int SingleModeIndex
+        {
+            get => _singleModeIndex;
+            set
+            {
+                _singleModeIndex = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentColors));  // Notify that the current colors might have changed.
+            }
+        }
+
+        private List<Color> _currentColors;
+        public List<Color> CurrentColors
+        {
+            get
+            {
+                if (_strimmer == null) return new List<Color>();
+
+                return _strimmer.roads[_roadIndex].singleMode[_singleModeIndex].colors
+                    .Select(rgbList => Color.FromArgb(255, (byte)rgbList[0], (byte)rgbList[1], (byte)rgbList[2]))
+                    .ToList();
+            }
+            set
+            {
+                if (value != _currentColors)
+                {
+                    _currentColors = value;
+                    OnPropertyChanged(nameof(CurrentColors));
+                }
+            }
+        }
+
+        public void UpdateColor(int colorIndex, List<int> newRgb)
+        {
+            if (colorIndex >= 0 && colorIndex < CurrentColors.Count)
+            {
+                _strimmer.roads[_roadIndex].singleMode[_singleModeIndex].colors[colorIndex] = newRgb;
+                OnPropertyChanged(nameof(CurrentColors));
+            }
+        }
+        public void RefreshColors()
+        {
+            OnPropertyChanged(nameof(CurrentColors));
+        }*/
     }
 
 }
