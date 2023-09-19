@@ -200,6 +200,6 @@ namespace W_Connect
                 ControllerInstance.strimmerController.roads[state].singleMode[5].colors[4] = new List<int> { ColorPicker6.SelectedColor.Value.R, ColorPicker1.SelectedColor.Value.G, ColorPicker1.SelectedColor.Value.B };
             } 
         }
-        //fix state, better handle save button click 
+        //fix state, better handle save button click, layout fix, file name, change strimmer effect, combobox, change control, last saved, save chagnes 
     }
 }
