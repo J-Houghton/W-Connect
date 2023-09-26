@@ -33,6 +33,13 @@ namespace W_Connect
     public partial class StrimmerUserControl : UserControl
     {
         private int state = -1;
+        public int State
+        {
+            set
+            {
+                state = value;
+            }
+        }
         public List<ColorPicker> colorPickers; 
         public Controller ControllerInstance { get; set; }
         public StrimmerUserControl()
@@ -50,9 +57,10 @@ namespace W_Connect
         {
             EffectsComboBox.ItemsSource = ControllerInstance.EffectDataDictionary.Keys;
         }
-        public void UpdateColorPickers()
+        public void UpdateColorPickers(int roadNum, int effectNum) //effectNumber = singleMode[0-2] size 3 
         {
-            StrimmerEffect effect = ControllerInstance.EffectDataDictionary["StrimerLightEfferct-" + ControllerInstance.strimmerController.roads[0].singleMode[0].name];
+            //StrimmerEffect effect = ControllerInstance.EffectDataDictionary["StrimerLightEfferct-" + ControllerInstance.strimmerController.roads[0].singleMode[0].name];
+            StrimmerEffect effect = ControllerInstance.strimmerController.roads[roadNum].singleMode[effectNum];
             if (effect != null)
             {
                 ColorPicker1.SelectedColor = Color.FromArgb(255, (byte)effect.colors[0][0], (byte)effect.colors[0][1], (byte)effect.colors[0][2]);
@@ -65,21 +73,27 @@ namespace W_Connect
             //ColorPicker1.SelectedColor = Color.FromArgb(255, (byte)ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][0], (byte)ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][1], (byte)ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][2]);
         }
 
-        private void UpdateLightNumBasedOnRoads(string selectRoad)
+        private void UpdateLightAndColorNumBasedOnRoads(string selectRoad)
         {
             switch(selectRoad)
             {
                 case "24":
                     LightToggleCheckBox5.Visibility = Visibility.Visible;
                     LightToggleCheckBox6.Visibility = Visibility.Visible;
+                    ColorPicker5.Visibility = Visibility.Visible;
+                    ColorPicker6.Visibility = Visibility.Visible;
                     break;
                 case "2x8":
                     LightToggleCheckBox5.Visibility = Visibility.Collapsed;
                     LightToggleCheckBox6.Visibility = Visibility.Collapsed;
+                    ColorPicker5.Visibility = Visibility.Collapsed;
+                    ColorPicker6.Visibility = Visibility.Collapsed;
                     break;
                 case "3x8":
                     LightToggleCheckBox5.Visibility = Visibility.Visible;
                     LightToggleCheckBox6.Visibility = Visibility.Visible;
+                    ColorPicker5.Visibility = Visibility.Visible;
+                    ColorPicker6.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -112,7 +126,8 @@ namespace W_Connect
                 _2x8Selector.Visibility = Visibility.Collapsed;
                 _3x8Selector.Visibility = Visibility.Collapsed;
                 state = 0;
-                UpdateLightNumBasedOnRoads("24");
+                UpdateLightAndColorNumBasedOnRoads("24");
+                UpdateColorPickers(0, 0);
             }
             else if (_24Selector.Visibility == Visibility.Visible)
             {
@@ -127,7 +142,8 @@ namespace W_Connect
                 _24Selector.Visibility = Visibility.Collapsed;
                 _3x8Selector.Visibility = Visibility.Collapsed;
                 state = 1;
-                UpdateLightNumBasedOnRoads("2x8");
+                UpdateLightAndColorNumBasedOnRoads("2x8");
+                UpdateColorPickers(1, 0);
             }
             else if (_2x8Selector.Visibility == Visibility.Visible)
             {
@@ -142,7 +158,8 @@ namespace W_Connect
                 _2x8Selector.Visibility = Visibility.Collapsed;
                 _24Selector.Visibility = Visibility.Collapsed;
                 state = 2;
-                UpdateLightNumBasedOnRoads("3x8");
+                UpdateLightAndColorNumBasedOnRoads("3x8");
+                UpdateColorPickers(2, 0);
             }
             else if (_3x8Selector.Visibility == Visibility.Visible)
             {
@@ -199,6 +216,63 @@ namespace W_Connect
                 ControllerInstance.strimmerController.roads[state].singleMode[4].colors[4] = new List<int> { ColorPicker6.SelectedColor.Value.R, ColorPicker1.SelectedColor.Value.G, ColorPicker1.SelectedColor.Value.B };
                 ControllerInstance.strimmerController.roads[state].singleMode[5].colors[4] = new List<int> { ColorPicker6.SelectedColor.Value.R, ColorPicker1.SelectedColor.Value.G, ColorPicker1.SelectedColor.Value.B };
             } 
+        }
+        private void UpdateCheckedBoxes(CheckBox changedCheckBox)
+        {
+            // Count the number of checked CheckBox controls in the CheckBoxPanel.
+            int checkedCount = CheckBoxPanel.Children.OfType<CheckBox>().Count(cb => cb.IsChecked == true && cb.Visibility == Visibility.Visible);
+            
+            if (checkedCount > 1)
+            {
+                if (changedCheckBox.IsChecked == true)
+                {
+                    string name = changedCheckBox.Name;
+                    if (name.Length > 18)
+                    {
+                        string numberAsString = name.Substring(19);
+                        if (int.TryParse(numberAsString, out int number))
+                        {
+                            if (state != -1)
+                            {
+                                UpdateColorPickers(state, number - 1);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (checkedCount == 1)
+            {
+                try
+                {
+                    CheckBox checkedBox = CheckBoxPanel.Children.OfType<CheckBox>().First(cb => cb.IsChecked == true);
+                    string name = checkedBox.Name;
+                    if (name.Length > 18)
+                    {
+                        string numberAsString = name.Substring(19);
+                        if (int.TryParse(numberAsString, out int number))
+                        {
+                            if (state != -1)
+                            {
+                                UpdateColorPickers(state, number - 1);
+                            }
+                        }
+                    }
+                } catch (Exception ex)
+                {
+
+                }
+                
+            }
+        }
+
+        private void LightToggleCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            UpdateCheckedBoxes(sender as CheckBox);
+        }
+
+        private void LightToggleCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateCheckedBoxes(sender as CheckBox);
         }
         //fix state, better handle save button click, layout fix, file name, change strimmer effect, combobox, change control, last saved, save chagnes 
     }

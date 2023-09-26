@@ -50,7 +50,7 @@ namespace W_Connect
             if (openFileDialog.ShowDialog() == true)
             {
                 TextBlock textBlock = (TextBlock)fileNameLabel.Content;
-                textBlock.Text = openFileDialog.FileName;
+                textBlock.Text += openFileDialog.FileName;
 
                 if (System.IO.Path.GetExtension(openFileDialog.FileName).ToLower() == ".backup")
                 {

@@ -68,7 +68,8 @@ namespace W_Connect
                     break;
                 }
             }
-            strimmerUserControlInstance.UpdateColorPickers();
+            strimmerUserControlInstance.UpdateColorPickers(0,0);
+            strimmerUserControlInstance.State = 0;
             //(DataContext as MainViewModel)?.RefreshColors();
             int colorsCount = strimmerUserControlInstance.ControllerInstance.strimmerController.roads[0].singleMode[0].colors.Count;
             /*strimmerUserControlInstance.ColorPicker1.SelectedColor = Color.FromArgb(255, (byte)strimmerUserControlInstance.ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][0], (byte)strimmerUserControlInstance.ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][1], (byte)strimmerUserControlInstance.ControllerInstance.strimmer.roads[0].singleMode[0].colors[0][2]);
